@@ -1,0 +1,69 @@
+html, body {
+        height: 100%;
+		width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+#header {
+	   height: 40%;
+       width: 74%;
+	   display: inline-block;
+	   float: left;
+	   
+	   
+}	  
+#map {
+       height: 35%;
+       width: 25%;
+	   display: inline-block;
+	   float: right;
+	   position:relative;
+	   
+      }
+#headline {
+	    
+		text-align: center;
+		font-family: Andale Mono, monospace;
+		font-weight: 700;
+		font-size: 350%;
+		
+		width: 65%;
+		float: right;
+		
+}
+#menu { 
+	text-align: center;
+    width: 100%;
+	float: center;
+	
+	display: inline-block;
+	
+    
+	
+	}
+#mainBlock {
+	text-align: center;
+    width: 100%;
+	
+    
+	
+}
+#button {
+display: inline-block;
+  color: rgba(255,255,255,.9);
+  text-decoration: none;
+  padding: .3em 1em;
+  outline: none;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-color: #32b2fd #000 #0610d7;
+  border-radius: 6px;
+  background: linear-gradient(#006af5, #008af5) #006af5;
+  transition: 0.2s;
+} 
+#button:hover  { background: linear-gradient(##008af5, #006af5) #008af5; }
+
+#button:active { background: linear-gradient(#006af5, #0f34f2) #006af5; }	
+}
+
+

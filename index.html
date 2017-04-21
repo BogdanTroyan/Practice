@@ -1,0 +1,187 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+<title> Practice</title>
+<link href="weatherstyle.css" rel="stylesheet" type="text/css" />
+<style type="text/css"></style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvVGbp13BVqbwwOhtw4jwRaNTgX4tyHUY&callback=initMap"
+    async defer></script>
+</head>
+
+<body>
+<div id="header"> 
+<p id="headline"> 5DayWeather API </p>
+
+</div>
+<div id="map"></div>
+ <div id="menu">   <p><input type="text" name="city_name" id="city_name" /><input type="button" id="button" name="button" value="&#128269; Search" onclick="showWeather(); return false;" /></p>
+	
+
+<FORM id="enterDate" name="enterDate" method="GET">
+<SELECT name="selectDate" id="selectDate" >
+<OPTION  VALUE="0">Choose the date</OPTION>
+<OPTION SELECTED VALUE="1">
+<script> temp_date = new Date();
+day = temp_date.getDate();
+month = temp_date.getMonth() + 1;
+if (day < 10) day = "0" + day;
+if (month <10) month = "0" + month;
+document.write(day + "." + month);
+ </script>
+ </OPTION>
+<OPTION VALUE="2">
+<script> temp_date = new Date();
+day = temp_date.getDate() + 1;
+month = temp_date.getMonth() + 1;
+if (day < 10) day = "0" + day;
+if (month <10) month = "0" + month;
+document.write(day + "." + month);
+ </script>
+</OPTION>
+<OPTION VALUE="3">
+<script> temp_date = new Date();
+day = temp_date.getDate() + 2;
+month = temp_date.getMonth() + 1;
+if (day < 10) day = "0" + day;
+if (month <10) month = "0" + month;
+document.write(day + "." + month);
+ </script>
+</OPTION>
+<OPTION VALUE="4">
+<script> temp_date = new Date();
+day = temp_date.getDate() + 3;
+month = temp_date.getMonth() + 1;
+if (day < 10) day = "0" + day;
+if (month <10) month = "0" + month;
+document.write(day + "." + month);
+ </script>
+</OPTION>
+<OPTION VALUE="5">
+<script> temp_date = new Date();
+day = temp_date.getDate() + 4;
+month = temp_date.getMonth() + 1;
+if (day < 10) day = "0" + day;
+if (month <10) month = "0" + month;
+document.write(day + "." + month);
+ </script>
+</OPTION>
+</SELECT>
+</FORM>
+	</div>
+	
+    <div id="mainBlock"></div>
+	
+	
+	<script>
+	
+	var cityName;
+	var result;
+	
+	function getOurDate() {
+	
+	var sel = document.getElementById("selectDate"); // Получаем наш список
+    var ourDate = sel.options[sel.selectedIndex].text;
+	
+	if (ourDate[0] == 0) { 
+	return ourDate[1]; 
+	} else {
+	return (ourDate[0] + ourDate[1]);
+	}
+	}
+	
+	
+	
+	
+    function loadWeather() {
+      
+	  
+	  cityName = document.getElementById("city_name").value;
+      var appId = "3dbcb48ae9924e7ee8b2f31f2c99c58e";
+	  var url = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + appId + "&units=metric" + "&lang=ru";
+	  var xhr = new XMLHttpRequest();
+	  
+      xhr.open('GET', url, false);
+      
+	  xhr.send();
+      
+	  
+  
+        if (xhr.status != 200) {
+          // обработать ошибку
+          alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+        } else {
+		       
+			   return xhr.responseText;
+               		   
+               			   
+    	}
+		
+	}    
+    
+	
+	function showWeather(){
+	
+	var data = loadWeather();
+	var choosenDate = getOurDate();
+	
+	
+	var result = JSON.parse(data, function(key, value) {
+                if (key == 'dt_txt') return new Date(value);
+                return value;
+               });
+            for (i=0; i<39; i++) {
+               
+			   if (result.list[i].dt_txt.getDate() == choosenDate ) {;
+	
+	
+	
+	
+	var temp = JSON.parse(data).list[i].main.temp;
+	var date = JSON.parse(data).list[i].dt_txt;
+	var status = JSON.parse(data).list[i].weather[0].description;
+	cityName = JSON.parse(data).city.name;
+	
+	var divWeather = document.createElement('div');
+    divWeather.className = "mainWeather";
+	divWeather.id = "mainWeather";
+    divWeather.innerHTML = "<br><strong>" + cityName+ "</strong><br>" + date + "<br><strong>" + temp + "&deg;C</strong>  " + status + "<br><hr />";
+	
+	mainBlock.appendChild(divWeather);
+	
+	}
+	
+	}
+	//initMap();
+	}
+	
+	/*var map;
+      function initMap() {
+	  
+	    var dataCoord = loadWeather();
+		var lt = JSON.parse(dataCoord).city.coord.lat;
+		var ln = JSON.parse(dataCoord).city.coord.lon;
+		if (lt == undefined || ln == undefined) {
+		return false;
+		} else {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: lt , lng: ln},
+          zoom: 5
+        });
+		}
+		
+      }*/
+  </script>
+
+	
+	
+	
+
+
+</form>
+
+</body>
+
+</html>

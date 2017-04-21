@@ -154,14 +154,7 @@
 			var divWeather = document.createElement('div');
 		    divWeather.className = "mainWeather";
 			divWeather.id = "mainWeather";
-		    divWeather.innerHTML = "
-											<br>
-												<strong>" + cityName+ "</strong>
-												<br>" + date + "
-													<br>
-														<strong>" + temp + "&deg;C</strong>  " + status + "
-														<br>
-															<hr />";
+		    divWeather.innerHTML = "<br><strong>" + cityName+ "</strong><br>" + date + "<br><strong>" + temp + "&deg;C</strong>  " + status + "<br><hr />";
 			
 			mainBlock.appendChild(divWeather);
 			
